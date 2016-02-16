@@ -7,7 +7,7 @@ Works in the latest versions of Edge, Firefox and Chrome (use https to enable we
 
 ####Why did I build this?
 
-My primary intention was to practice my web development skills as I come from a .NET and Android background. But the more I got into it, the more I saw the importance and the need of an open-source alternative to Snapchat. By no means am I anti-Snapchat (I'll still probably use it every day for the time being), but the incentives are evident:
+My primary intention was to practice my web development skills as I come from a .NET and Android background. The more I got into it however, the more I saw the importance and the need of an open-source alternative to Snapchat. By no means am I anti-Snapchat (I'll still probably use it every day for the time being), but the incentives are evident:
 
 * As a non-profit open source project, no complicitness in comprimising data to advertisters or the gov't
 * Project development not geared towards monetization (e.g. ads, blocking 3rd party clients)
