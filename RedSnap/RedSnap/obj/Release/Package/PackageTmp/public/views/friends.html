@@ -1,0 +1,35 @@
+﻿<table class="table">
+    <tbody>
+        <tr>
+            <td>
+                <input class="form-control" type="text" name="friendsearch" placeholder="Enter friend's name" ng-model="potentialfriend" />
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="befriend(potentialfriend, listfriends())">
+                    <span class="glyphicon glyphicon-plus"></span> 
+                </button>
+            </td>
+        </tr>
+        <tr ng-show="msg">
+            <td>
+                <h5 class="text-primary"> {{ msg }}</h5>
+            </td>
+        </tr>
+        <tr ng-repeat="friend in friends.current">
+            <td>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="unfriend(friend.username, listfriends())">
+                    <span class="glyphicon glyphicon-remove" ></span>
+                </button>
+            </td>
+            <td><h5>{{ friend.username }}</h5></td>
+        </tr>
+        <tr ng-repeat="friend in friends.requested">
+            <td>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="befriend(friend.username, listfriends())">
+                    <span class="glyphicon glyphicon-plus"></span> 
+                </button>
+            </td>
+            <td><h5>{{ friend.username }}</h5></td>
+        </tr>    
+    </tbody>
+</table>

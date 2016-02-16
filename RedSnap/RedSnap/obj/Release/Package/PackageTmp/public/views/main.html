@@ -1,0 +1,15 @@
+﻿<table class="table">
+    <tbody>
+        <tr ng-repeat="snap in snaps">
+            <td>
+                <button class="btn btn-danger btn-sm" type="button" ng-click="open(snap)">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </button>
+            </td>
+            <td>
+                <h5 class="pull-right">{{ snap.sender }}</h5>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

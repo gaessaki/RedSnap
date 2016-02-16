@@ -1,0 +1,10 @@
+﻿<div class="cam-box">
+    <webcam 
+            on-stream="onStream(stream)"
+            on-access-denied="onError(err)"
+            on-streaming="onSuccess()"
+            channel="channel"
+            >
+    </webcam>
+    <button id="snapButton" class="btn btn-default btn-lg btn-block" type="button" ng-click="snap()"><span class="glyphicon glyphicon-camera"></span> </button>
+</div>

@@ -1,0 +1,106 @@
+﻿<!doctype html>
+
+<html ng-app="RedSnap">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>RedSnap - Open Source Web SnapChat Clone</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/flatlogic/awesome-bootstrap-checkbox/master/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="./stylesheets/style.css" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular-cookies.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular-resource.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular-sanitize.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular-animate.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="javascripts/core.js"></script>
+
+    <script src="javascripts/providers/socket.js"></script>
+
+    <script src="javascripts/directives/webcam.js"></script>
+    <script src="javascripts/directives/canvas.js"></script>
+
+    <script src="javascripts/controllers/main.js"></script>
+    <script src="javascripts/controllers/login.js"></script>
+    <script src="javascripts/controllers/logout.js"></script>
+    <script src="javascripts/controllers/register.js"></script>
+    <script src="javascripts/controllers/cam.js"></script>
+    <script src="javascripts/controllers/cam/view.js"></script>
+    <script src="javascripts/controllers/cam/draw.js"></script>
+    <script src="javascripts/controllers/friends.js"></script>
+
+    <script src="javascripts/services/Auth.js"></script>
+    <script src="javascripts/services/Session.js"></script>
+    <script src="javascripts/services/User.js"></script>
+    <script src="javascripts/services/Friend.js"></script>
+    <script src="javascripts/services/FriendService.js"></script>
+    <script src="javascripts/services/Snap.js"></script>
+    <script src="javascripts/services/SnapView.js"></script>
+    <script src="javascripts/services/SnapService.js"></script>
+    <script src="javascripts/services/http-auth-interceptor.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-col" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="#">RedSnap</a>
+            </div>
+            <div class="collapse navbar-collapse" id="nav-col">
+                <ul class="nav navbar-nav">
+                    <!-- ng-show="isLoggedIn" -->
+                    <li ng-show="loggedIn">
+                        <a ui-sref="main">Snaps</a>
+                    </li>
+                    <li ng-show="loggedIn">
+                        <a ui-sref="cam.view">Cam</a>
+                    </li>
+                    <li ng-show="loggedIn">
+                        <a ui-sref="friends">Friends</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-hide="loggedIn">
+                        <a ui-sref="login">Log In</a>
+                    </li>
+                    <li ng-show="loggedIn">
+                        <a ui-sref="logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div ui-view></div>
+    </div>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-73755334-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</body>
+</html>
