@@ -24,7 +24,7 @@ As it stands, RedSnap is WIP and thus I can make no guarantee of security, priva
 
 ##Installation
 
-Requires a MongoDB anda Redis instance (check out https://compose.io to quickly sping some up). To install, clone the repo and then create a config.js file in the root folder of the application (the one with app.js). Then include the following in the file:
+Requires MongoDB and Redis instances (check out https://compose.io to quickly spin some up). To install, clone the repo and then create a config.js file in the root folder of the application (the one with app.js). Then include the following in the file:
 
 ```
 module.exports = {
@@ -37,13 +37,15 @@ module.exports = {
     deleteSnaps: true
 }
 ```
-As you can image, the ```deleteSnaps``` option determines whether snaps are deleted. If set to false, The user may review any snaps she or he has received repeatedly.
+As you can imagine, the ```deleteSnaps``` option determines whether snaps are deleted. If set to false, The user may review any snaps she or he has received repeatedly.
 
 ##Program Structure
 
 The app bootstraps from **app.js** which connects to the databases and enables the API routes. All the routes and middlewares are outlined in **routes.js**, also in the same folders. The meat of the API calls are in the controllers folder in the app root. Users are stored in MongoDB, for which the models resides in the models folder. The systems folder contains misc code that is to be reused throughout the backend (passport bootstrapping, redis connection, cron job to delete snaps, etc.)
 
 All the client (i.e. browser) content resides in the public folder. If you're familiar with Angular, the structure should be clear enough. All the html files are stored in view. Each html has a corresponding controller in the public/javascripts/controllers folder. The angular app is bootstrapped in **core.js**, which is in the javascripts folder.
+
+The bin folder is for Azure to start an instance of the app.
 
 ##Contributors
 
