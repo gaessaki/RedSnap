@@ -52,6 +52,7 @@ The bin folder is for Azure to start an instance of the app.
 * Mostafa Saadat - Tested app functionality throughout the hacking process, made favicon
 * Afuad Hossain - Discovered bug in friending functionality during use
 * Zack Ohlin - Discovered bug in friending functionality during use 
+* 'Daft Monk' - Used his [Angular-Passport CRUD demo] (https://github.com/DaftMonk/angular-passport) as the inspiration RedSnap's auth system
 
 ##License
 
