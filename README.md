@@ -47,9 +47,9 @@ All the client (i.e. browser) content resides in the public folder. If you're fa
 
 ##Contributors
 
-Mostafa Saadat - Tested app functionality throughout the hacking process
-Afuad Hossain - Discovered bug in friending functionality during use
-Zack Ohlin - Discovered bug in friending functionality during use 
+* Mostafa Saadat - Tested app functionality throughout the hacking process
+* Afuad Hossain - Discovered bug in friending functionality during use
+* Zack Ohlin - Discovered bug in friending functionality during use 
 
 ##License
 
