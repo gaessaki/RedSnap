@@ -49,7 +49,7 @@ The bin folder is for Azure to start an instance of the app.
 
 ##Contributors
 
-* Mostafa Saadat - Tested app functionality throughout the hacking process
+* Mostafa Saadat - Tested app functionality throughout the hacking process, made favicon
 * Afuad Hossain - Discovered bug in friending functionality during use
 * Zack Ohlin - Discovered bug in friending functionality during use 
 
