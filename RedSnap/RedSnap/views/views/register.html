@@ -1,0 +1,16 @@
+﻿<form id="login-well" class="form-register well">
+    <h3 class="form-signin-heading">Please Register</h3>
+    <div class="form-group">
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Username" ng-model="formData.username" autofocus>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" ng-model="formData.email" autofocus>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="formData.password" required>
+    </div>
+        <button class="btn btn-lg btn-warn btn-block" type="submit" ng-click="register()">Register</button>
+</form>

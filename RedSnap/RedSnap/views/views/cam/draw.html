@@ -1,0 +1,43 @@
+﻿<div class="cam-box">
+    <div class="col-md-6 well">
+        <div>
+            <snapcanvas />
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <input class="form-control" placeholder="Enter a brief message" maxlength="74" ng-model="loveMessage"/>
+            </div>
+            <div class="col-md-3">
+                <select class="form-control" ng-options="option.name for option in data.availableOptions track by option.value" ng-model="data.selectedOption">
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Send To...
+        </div>
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="friend in friends.current">
+                    <td>
+                        <div class="checkbox checkbox-danger">
+                            <input id="checkbox{{friend.username}}" type="checkbox" class="styled" ng-model="friend.isChecked" ng-change="checked(friend.username, friend.isChecked)" />
+                            <label for="checkbox{{friend.username}}">{{ friend.username }}</label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-danger btn-lg btn-block" ng-click="sendSnap()">
+            <span class="glyphicon glyphicon-edit"></span>
+            Send
+        </button>
+    </div>
+    <p class="text-center" ng-show="loading">
+        <span class="panel-default fa fa-spinner fa-pulse fa-3x"></span>
+    </p>
+</div>
+
