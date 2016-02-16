@@ -1,64 +1,912 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Redsnap by gaessaki</title>
+<head>
+<title></title>
+<style>
+h1, h2, h3, h4, h5, h6, ul, ol, dl, dt, p, hr, menu, .post h1 + h1, .post h1 + h2, .post h1 + h3, .post h2 + h1, .post h2 + h2, .post h2 + h3, .post h3 + h1, .post h3 + h2, .post h3 + h3, .excerpt h1 + h1, .excerpt h1 + h2, .excerpt h1 + h3, .excerpt h2 + h1, .excerpt h2 + h2, .excerpt h2 + h3, .excerpt h3 + h1, .excerpt h3 + h2, .excerpt h3 + h3 {
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+*, *::after, *::before {
+	outline: 0;
+	box-sizing: border-box;
+}
+pre, table, video, iframe, figure, blockquote, .excerpt .thumbnail {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+h3, legend {
+	font-size: 1.37em;
+}
+h2 {
+	font-size: 1.7em;
+}
+.excerpt, .post-footer, .pagination, .snowflakes, .big-push {
+	margin-top: 5rem;
+}
+.container > *, .colophon > * {
+	max-width: 43.75rem;
+	margin-left: calc(50% - 43.75rem * .5);
+}
+h1 {
+	font-size: 2.2em;
+}
+.post h1, .post h2, .post h3, .excerpt h1, .excerpt h2, .excerpt h3, .standard-form fieldset:not(:first-child), .small-push {
+	margin-top: 3.12rem;
+}
+body {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	min-height: 100vh;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	margin: 0;
+	color: #3a3b3c;
+	font-weight: 300;
+	font-size: 1.18rem;
+	line-height: 1.6;
+}
+body, input, select, button, textarea {
+	font-family: "Proxima Nova", "Avenir", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+}
+.branding {
+	width: 100%;
+	max-width: 100%;
+	margin-left: 0px;
+	padding-left: calc(50% - 62.5rem * .5);
+	padding-right: calc(50% - 62.5rem * .5);
+}
+.branding {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 80px;
+	z-index: 2;
+	color: #ffffff;
+	text-align: right;
+}
+body > main {
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+.content {
+	padding-bottom: 5rem;
+}
+.colophon {
+	color: #7a7b7c;
+	background-color: #3A3B3C;
+	background-image: url(/images/texture.png),linear-gradient(to bottom, #3A3B3C, #1d1e1e);
+	background-repeat: repeat, no-repeat;
+	background-position: left top, left top;
+	background-size: 100px 100px, 100% 100%;
+	font-size: 0.77em;
+}
+h1, h2, h3, h4, h5, h6, dt, legend {
+	line-height: 1.35;
+}
+h1, h2, h3 {
+	letter-spacing: -0.01em;
+	word-spacing: 0.02em;
+}
+h1, h1 a, h2, h2 a, h3, h3 a {
+	font-weight: 300;
+}
+figure {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.column-container, .post-share, .colophon .social-nav, .job-listings, .citation, .author-bio, .pagination, .gallery, .feature, .inline-form, .database-pricing .swap-nav, .database-pricing .pricing-calculator, .database-pricing .database-features, .colophon .footer-nav, .two-across, .three-across, .four-across {
+	font-family: "Empty";
+}
+.container > .wide, .container > .footer-nav, .colophon > .wide, .colophon > .footer-nav, .customer-logos svg {
+	max-width: 62.5rem;
+	margin-left: calc(50% - 62.5rem * .5);
+}
+.colophon p {
+	font-size: 0.85em;
+	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+.colophon dl {
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Proxima Nova", "Avenir", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+	width: calc(25% - 3em * 0.75);
+	margin-left: 3em;
+	margin-right: 0px;
+}
+.colophon dl:nth-of-type(4n+1) {
+	margin-left: 0px;
+}
+dt {
+	font-weight: 600;
+	margin-bottom: 0.22em;
+}
+.typewriter .words, .colophon dt {
+	text-transform: uppercase;
+}
+.colophon dt {
+	color: #ffffff;
+	margin-bottom: 0.5rem;
+}
+dd {
+	margin-left: 0px;
+}
+a, button {
+	cursor: pointer;
+	text-decoration: none;
+}
+.main-nav .articles {
+	border-bottom-color: #ffffff !important;
+}
+a, a:visited {
+	color: #009ddc;
+	border-bottom: 1px solid transparent;
+}
+.branding a, .error-banner .container a:not(.btn), .branding a:visited, .error-banner .container a:not(.btn):visited {
+	color: #ffffff;
+	border-bottom: 1px solid transparent;
+}
+a.register-btn, a.register-btn:visited {
+	border: 1px solid #FFFFFF;
+}
+/* @media all and (min-width:700px) */
+.main-nav > a, .main-nav .drop-down {
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Proxima Nova", "Avenir", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-size: 0.66em;
+	margin-left: 24px;
+}
+.branding a {
+	font-weight: 600;
+}
+.colophon dd > a {
+	display: inline;
+	font-weight: 600;
+}
+.colophon dd > a, .colophon dd > a:visited {
+	color: inherit;
+	border-bottom: 1px solid transparent;
+}
+.colophon dd > a::after {
+	content: "\A";
+	white-space: pre;
+}
+.colophon .social-nav {
+	margin-top: 1.5rem;
+}
+.post-share a, .colophon .social-nav a {
+	margin-right: 5px;
+}
+.colophon .social-nav a {
+	margin-bottom: 5px;
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Proxima Nova", "Avenir", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	color: #7a7b7c;
+}
+.colophon .social-nav a, .colophon .social-nav a:visited {
+	border: 1px solid #7A7B7C;
+}
+.colophon .social-nav a svg {
+	width: inherit;
+	height: inherit;
+	fill: currentColor;
+	position: relative;
+	left: -1px;
+	top: -1px;
+}
+.amp {
+	font-weight: 400;
+	font-style: italic;
+	font-family: "Baskerville", "Palatino", "Book Antiqua", serif;
+}
+.hero {
+	color: #ffffff;
+	text-align: center;
+	position: relative;
+	background-color: #009DDC;
+	background-image: url(/images/texture.png),linear-gradient(to bottom, #009DDC, #006ccb);
+	background-repeat: repeat, no-repeat;
+	background-position: left top, left top;
+	background-size: 100px 100px, 100% 100%;
+}
+.container > :first-child {
+	padding-top: calc(5rem + 95px);
+}
+.avatar {
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+}
+.column, .job-listings .swap-nav, .job-listings .swap-container, .citation img, .citation figcaption, .author-bio img, .author-bio figcaption, .pagination a, .pagination span, .feature img, .feature figcaption, .inline-form .input-field, .inline-form .form-submit, .database-pricing a.swap-trigger {
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Proxima Nova", "Avenir", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+}
+.citation img, .citation figcaption, .author-bio img, .author-bio figcaption {
+	vertical-align: middle;
+}
+h1.post-title {
+	margin-top: 1rem;
+	margin-bottom: 1.2rem;
+}
+blockquote > :first-child, .hero > :first-child, .post-footer .author-bio > :first-child, figure > :first-child, .feature img > :first-child, .feature figcaption > :first-child, .callout > :first-child, .database-pricing .pricing-calculator > :first-child, .database-pricing .signup-separator > :first-child, .database-pricing .database-features > :first-child, .container > :first-child, .footnote > :first-child, .database-type label > :first-child, .two-across.small-push > * > :first-child, .two-across.big-push > * > :first-child, .three-across.small-push > * > :first-child, .three-across.big-push > * > :first-child, .four-across.small-push > * > :first-child, .four-across.big-push > * > :first-child, blockquote > :first-child > :first-child, .hero > :first-child > :first-child, .post-footer .author-bio > :first-child > :first-child, figure > :first-child > :first-child, .feature img > :first-child > :first-child, .feature figcaption > :first-child > :first-child, .callout > :first-child > :first-child, .database-pricing .pricing-calculator > :first-child > :first-child, .database-pricing .signup-separator > :first-child > :first-child, .database-pricing .database-features > :first-child > :first-child, .container > :first-child > :first-child, .footnote > :first-child > :first-child, .database-type label > :first-child > :first-child, .two-across.small-push > * > :first-child > :first-child, .two-across.big-push > * > :first-child > :first-child, .three-across.small-push > * > :first-child > :first-child, .three-across.big-push > * > :first-child > :first-child, .four-across.small-push > * > :first-child > :first-child, .four-across.big-push > * > :first-child > :first-child, blockquote > :first-child > :first-child > :first-child, .hero > :first-child > :first-child > :first-child, .post-footer .author-bio > :first-child > :first-child > :first-child, figure > :first-child > :first-child > :first-child, .feature img > :first-child > :first-child > :first-child, .feature figcaption > :first-child > :first-child > :first-child, .callout > :first-child > :first-child > :first-child, .database-pricing .pricing-calculator > :first-child > :first-child > :first-child, .database-pricing .signup-separator > :first-child > :first-child > :first-child, .database-pricing .database-features > :first-child > :first-child > :first-child, .container > :first-child > :first-child > :first-child, .footnote > :first-child > :first-child > :first-child, .database-type label > :first-child > :first-child > :first-child, .two-across.small-push > * > :first-child > :first-child > :first-child, .two-across.big-push > * > :first-child > :first-child > :first-child, .three-across.small-push > * > :first-child > :first-child > :first-child, .three-across.big-push > * > :first-child > :first-child > :first-child, .four-across.small-push > * > :first-child > :first-child > :first-child, .four-across.big-push > * > :first-child > :first-child > :first-child {
+	margin-top: 0px;
+}
+.hero > h1:first-child, .container > :first-child.hero > h1:first-child {
+	margin-top: -0.25em;
+}
+.container > .container, .colophon > .container {
+	max-width: 100%;
+	margin-left: 0px;
+}
+.container > .hero, .colophon > .hero {
+	width: 100%;
+	max-width: 100%;
+	margin-left: 0px;
+	padding-left: calc(50% - 43.75rem * .5);
+	padding-right: calc(50% - 43.75rem * .5);
+}
+.container > :first-child.container {
+	padding-top: 0px;
+}
+.container > :first-child.hero {
+	height: 500px;
+	padding-top: 45px;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	margin-bottom: 5rem;
+}
+.post-footer {
+	clear: both;
+}
+.post-footer .author-bio {
+	border: 1px solid #D1D1D1;
+	border-radius: 2px;
+	padding: 1.5em;
+}
+img, video {
+	max-width: 100%;
+	height: auto;
+}
+.post-footer .author-bio figcaption {
+	font-size: 0.77em;
+}
+blockquote > :last-child, .hero > :last-child, .post-footer .author-bio > :last-child, figure > :last-child, .feature img > :last-child, .feature figcaption > :last-child, .callout > :last-child, .database-pricing .pricing-calculator > :last-child, .database-pricing .signup-separator > :last-child, .database-pricing .database-features > :last-child, blockquote > :last-child > :last-child, .hero > :last-child > :last-child, .post-footer .author-bio > :last-child > :last-child, figure > :last-child > :last-child, .feature img > :last-child > :last-child, .feature figcaption > :last-child > :last-child, .callout > :last-child > :last-child, .database-pricing .pricing-calculator > :last-child > :last-child, .database-pricing .signup-separator > :last-child > :last-child, .database-pricing .database-features > :last-child > :last-child, blockquote > :last-child > :last-child > :last-child, .hero > :last-child > :last-child > :last-child, .post-footer .author-bio > :last-child > :last-child > :last-child, figure > :last-child > :last-child > :last-child, .feature img > :last-child > :last-child > :last-child, .feature figcaption > :last-child > :last-child > :last-child, .callout > :last-child > :last-child > :last-child, .database-pricing .pricing-calculator > :last-child > :last-child > :last-child, .database-pricing .signup-separator > :last-child > :last-child > :last-child, .database-pricing .database-features > :last-child > :last-child > :last-child {
+	margin-bottom: 0px;
+}
+.citation figcaption, .author-bio figcaption {
+	width: calc(100% - 60px);
+	padding-left: 1em;
+}
+b, strong {
+	font-weight: 600;
+}
+.post-footer h5, .post-footer strong {
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	padding-bottom: 0.5em;
+	letter-spacing: 0.1em;
+	margin: 0;
+}
+.post-footer .post-share a {
+	vertical-align: middle;
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Proxima Nova", "Avenir", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	color: #009ddc;
+}
+.post-footer .post-share a, .post-footer .post-share a:visited {
+	border: 1px solid #009DDC;
+}
+.post-footer .post-share a.subscribe-btn {
+	width: auto;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 30px;
+	padding: 0 1.223em;
+	text-transform: uppercase;
+	margin-right: 0px;
+	float: right;
+}
+.post-footer .post-share a svg {
+	width: inherit;
+	height: inherit;
+	fill: currentColor;
+	position: relative;
+	left: -1px;
+	top: -1px;
+}
+.post-footer .post-share a.subscribe-btn svg {
+	float: left;
+	width: 30px;
+	height: 30px;
+	margin-left: -8px;
+}
+.logo span, .typewriter .word, .snowflakes, .swappable, .hidden, .database-type label .details {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+.post-footer .post-share a span {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+pre, code, kbd, samp {
+	color: #3a3b3c;
+	font-family: "Source Code Pro", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+pre, code {
+	font-size: 0.89em;
+	direction: ltr;
+	text-align: left;
+	word-spacing: normal;
+	-moz-tab-size: 2;
+	tab-size: 2;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	font-weight: 400;
+	-moz-tab-size: 2;
+	tab-size: 2;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+:not(pre) > code {
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	background: #f9fafa;
+	border: 1px solid #ECEDEE;
+	border-radius: 2px;
+	padding: 0 .4em;
+}
+pre {
+	overflow: auto;
+	padding: 1.5em;
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+	border-radius: 2px;
+	background: #262829;
+}
+pre > code {
+	font-size: 1em;
+}
+pre, pre code {
+	color: #ecedee;
+}
+.btn, p > img:only-child, p > iframe:only-child {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+p > img:only-child {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+.hero h1, .hero h2, .hero h3, .hero strong {
+	color: inherit;
+}
+.hero .post-date, .hero .attribution {
+	position: absolute;
+	bottom: 10px;
+	font-size: 0.61em;
+}
+.hero .post-date {
+	right: 15px;
+}
+.hero a, .hero a:hover, .hero a:focus, .hero a:active, .hero a:visited {
+	color: #ffffff;
+}
+.hero a {
+	border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+.hero .post-share a {
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Proxima Nova", "Avenir", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	color: #ffffff;
+}
+.hero .post-share a, .hero .post-share a:visited {
+	border: 1px solid #FFFFFF;
+}
+.hero .post-share a span {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+.hero .post-share a svg {
+	width: inherit;
+	height: inherit;
+	fill: currentColor;
+	position: relative;
+	left: -1px;
+	top: -1px;
+}
+.logo {
+	position: absolute;
+	display: block;
+	width: 160px;
+	height: 80px;
+}
+.logo, .logo:hover, .logo:focus, .logo:active {
+	border: 0;
+}
+/* @media all and (min-width:700px) */
+a.menu-btn {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+/* @media all and (min-width:700px) */
+.main-nav {
+	position: static;
+	top: auto;
+	left: auto;
+	font-family: "Empty";
+	padding-left: 135px;
+	display: inline-block;
+	text-align: center;
+}
+/* @media all and (min-width:700px) */
+.main-nav .drop-down {
+	position: relative;
+	line-height: 21px;
+}
+/* @media all and (min-width:700px) */
+.main-nav > a:not(.register-btn), .main-nav :not(.register-btn).drop-down {
+	margin-top: 30px;
+}
+a.register-btn {
+	line-height: 30px;
+	margin-top: 25px;
+}
+a.register-btn {
+	padding: 0 1.223em;
+	display: inline-block;
+	vertical-align: top;
+	font-family: "Proxima Nova", "Avenir", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+	width: "";
+	height: 30px;
+	border-radius: 30px;
+	color: #ffffff;
+}
+/* @media all and (min-width:700px) */
+.main-nav .drop-down dt {
+	display: inline-block;
+	margin: 0 0 10px 0;
+	color: inherit;
+}
+ul, ol {
+	padding-left: 0px;
+	text-align: left;
+	list-style-position: inside;
+}
+ul {
+	list-style-type: circle;
+}
+li ul, li ol, dd ul, dd ol {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+/* @media all and (min-width:700px) */
+.main-nav .drop-down ul {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+	list-style: none;
+	padding-left: 0px;
+	margin-top: 0px;
+	text-align: center;
+}
+ul li {
+	text-indent: -1em;
+	padding-left: 1em;
+}
+/* @media all and (min-width:700px) */
+.main-nav .drop-down ul li {
+	text-indent: 0px;
+	padding-left: 0px;
+}
+/* @media all and (min-width:700px) */
+.main-nav .drop-down a {
+	display: block;
+	background: #FFFFFF;
+	padding-top: 10px;
+	padding-bottom: 8px;
+	background: #FFFFFF;
+	color: #009ddc;
+	border: 0;
+}
+/* @media all and (min-width:700px) */
+.main-nav .drop-down li:last-child a {
+	border-radius: 0 0 2px 2px;
+}
+/* @media all and (min-width:700px) */
+.main-nav .drop-down li:first-child a {
+	border-radius: 2px 2px 0 0;
+}
+/* @media all and (min-width:700px) */
+.main-nav .drop-down li:first-child a::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: -6px;
+	width: 0px;
+	height: 0px;
+	z-index: -1;
+	margin-left: -8px;
+	border-style: solid;
+	border-width: 0 8px 6px 8px;
+	border-color: transparent transparent #FFFFFF transparent;
+}
+.logo svg {
+	width: inherit;
+	height: inherit;
+	fill: currentColor;
+}
+</style>
+</head>
+<body class="post-template tag-compose-2 tag-mongodb tag-oplog tag-meteor blend-mode">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Redsnap</h1>
-        <p>An open-source web-based Snapchat clone. Built with node.js, express.js, angular, mongodb and redis.</p>
+  <svg xmlns="http://www.w3.org/2000/svg" id="icons" style="display: none;">
 
-        <p class="view"><a href="https://github.com/gaessaki/RedSnap">View the Project on GitHub <small>gaessaki/RedSnap</small></a></p>
+  <symbol id="logo" fill="currentColor" viewBox="0 0 650 121.8">
+    <path d="M 325.4 28.6 c -16.7 0 -28.7 12.2 -28.7 29 s 12.1 29 28.7 29 c 16.7 0 28.7 -12.2 28.7 -29 c 0.1 -16.8 -12 -29 -28.7 -29 Z m 0 46.7 c -9.5 0 -16.1 -7.3 -16.1 -17.7 c 0 -10.6 6.5 -17.7 16.1 -17.7 c 9.5 0 16.1 7.3 16.1 17.7 c 0.1 10.4 -6.6 17.7 -16.1 17.7 Z" />
+    <polygon points="394.1,50.2 380.7,28.8 365,28.8 365,84.8 378,84.8 378,48.3 394.5,71.4 411,48.3 411,84.8 423,84.8 423,28.8 407.6,28.8" />
+    <path d="M 461.3 28.8 h -25.3 v 56 h 12 v -18 h 13.3 c 11.1 0 18.9 -8.3 18.9 -19 c 0.1 -10.7 -7.7 -19 -18.9 -19 Z m -1.2 27 h -12.1 v -15 h 12.1 c 4.5 0 7.6 3.4 7.6 7.5 s -3.1 7.5 -7.6 7.5 Z M 516.1 28.6 c -16.7 0 -28.7 12.2 -28.7 29 s 12.1 29 28.7 29 c 16.7 0 28.7 -12.2 28.7 -29 c 0.1 -16.8 -12 -29 -28.7 -29 Z m 0 46.7 c -9.5 0 -16.1 -7.3 -16.1 -17.7 c 0 -10.6 6.5 -17.7 16.1 -17.7 c 9.5 0 16.1 7.3 16.1 17.7 c 0 10.4 -6.6 17.7 -16.1 17.7 Z M 576.9 50.7 c -6.5 -1.6 -10.4 -2.8 -10.4 -5.5 c 0 -3.1 2.9 -5.1 7.5 -5.1 c 5.6 0 10.7 2 14.3 5.6 l 1.2 1.2 l 7.2 -9.4 l -1 -0.9 c -5.4 -5.2 -12.5 -7.8 -21 -7.8 c -12.1 0 -20.9 7.2 -20.9 17 c 0 12.3 11 15.1 19.9 17.4 c 6.9 1.8 11.1 3.1 11.1 6.4 c 0 2.6 -2.4 5.7 -9.2 5.7 c -8.1 0 -13.3 -4.3 -15.7 -6.8 l -1.3 -1.3 l -7 9.7 l 0.9 0.9 c 5.5 5.8 13.3 8.9 22.7 8.9 c 16.3 0 22.1 -9.3 22.1 -17.9 c 0.2 -12.9 -11.7 -15.9 -20.4 -18.1 Z" />
+    <polygon points="650,40.8 650,28.8 608,28.8 608,84.8 650,84.8 650,73.8 620,73.8 620,61.8 646,61.8 646,50.8 620,50.8 620,40.8" />
+    <path d="M 238 57.9 c 0 16.8 11.9 29 29 29 c 8.9 0 16.4 -3.6 21.7 -10.7 l -8 -8 c -2.4 4 -8.3 7.4 -13.2 7.4 c -9.8 0 -16.8 -7.6 -16.8 -17.8 c 0 -10.2 7.1 -17.8 16.9 -17.8 c 4.9 0 10.9 3.4 13.3 7.4 l 8.1 -8 c -5.3 -7.1 -13 -10.7 -21.9 -10.7 c -17.2 0.2 -29.1 12.4 -29.1 29.2 Z M 379.2 114.3 h -7.5 l 3.7 -9.9 l 3.8 9.9 Z m 6.7 7.2 l -8.2 -20.8 h -4.6 l -8.2 20.8 h 4.1 l 1.5 -4 h 9.5 l 1.5 4 h 4.4 Z" />
+    <polygon points="407.7,121.5 407.7,100.7 404.1,100.7 404.1,115.1 393.5,100.7 389.7,100.7 389.7,121.5 393.4,121.5 393.4,106.6 404.2,121.5" />
+    <rect x="423.3" y="100.7" width="3.6" height="20.8" />
+    <path d="M 442.6 118.2 h -6 v -5.8 h 6 c 2.1 0 3.2 1.3 3.2 2.9 c 0 1.9 -1.2 2.9 -3.2 2.9 Z m -0.2 -8.9 h -5.8 v -5.4 h 5.8 c 1.9 0 2.9 1.2 2.9 2.7 c 0 1.5 -1 2.7 -2.9 2.7 Z m 1 12.2 c 3.9 0 6 -2.4 6 -5.6 c 0 -2.6 -1.8 -4.8 -4 -5.1 c 1.9 -0.4 3.6 -2.2 3.6 -4.8 c 0 -2.9 -2.1 -5.3 -5.9 -5.3 h -10.2 v 20.8 h 10.5 Z" />
+    <polygon points="476.3,121.5 476.3,100.7 471.2,100.7 465.5,114.3 459.8,100.7 454.7,100.7 454.7,121.5 458.3,121.5 458.3,106 464.7,121.5 466.3,121.5 472.7,106 472.7,121.5" />
+    <path d="M 501.8 121.8 c 4.2 0 6.8 -2.2 8.4 -4.7 l -3.1 -1.6 c -1 1.7 -3 3 -5.2 3 c -4.1 0 -7.2 -3.1 -7.2 -7.5 s 3.1 -7.5 7.2 -7.5 c 2.2 0 4.2 1.3 5.2 3 l 3.1 -1.6 c -1.6 -2.5 -4.1 -4.7 -8.4 -4.7 c -6.1 0 -10.9 4.4 -10.9 10.8 c 0 6.5 4.8 10.8 10.9 10.8 Z M 524.4 118.6 c -4.2 0 -6.9 -3.2 -6.9 -7.5 s 2.7 -7.5 6.9 -7.5 s 6.9 3.2 6.9 7.5 c 0 4.2 -2.7 7.5 -6.9 7.5 Z m 0 3.2 c 6.2 0 10.6 -4.6 10.6 -10.8 s -4.4 -10.8 -10.6 -10.8 s -10.6 4.6 -10.6 10.8 s 4.3 10.8 10.6 10.8 Z" />
+    <polygon points="561.7,121.5 561.7,100.7 556.6,100.7 550.9,114.3 545.2,100.7 540.1,100.7 540.1,121.5 543.7,121.5 543.7,106 550.1,121.5 551.7,121.5 558.1,106 558.1,121.5" />
+    <path d="M 576.3 110.5 h -5 v -6.6 h 5 c 2.1 0 3.6 1.3 3.6 3.3 s -1.5 3.3 -3.6 3.3 Z m -5 11 v -7.8 h 5.5 c 4.3 0 6.8 -3 6.8 -6.5 s -2.4 -6.5 -6.8 -6.5 h -9.1 v 20.8 h 3.6 Z M 597.9 114.3 h -7.5 l 3.7 -9.9 l 3.8 9.9 Z m 6.7 7.2 l -8.2 -20.8 h -4.6 l -8.2 20.8 h 4.1 l 1.5 -4 h 9.5 l 1.5 4 h 4.4 Z" />
+    <polygon points="626.4,121.5 626.4,100.7 622.8,100.7 622.8,115.1 612.1,100.7 608.4,100.7 608.4,121.5 612.1,121.5 612.1,106.6 622.9,121.5" />
+    <polygon points="642,121.5 642,112.8 650,100.7 645.8,100.7 640.1,109.6 634.4,100.7 630.2,100.7 638.3,112.8 638.3,121.5" />
+    <path d="M 158.1 23.1 h -0.1 l -38.8 -22.6 l -38.3 22.3 l -39.3 -22.8 l -41.6 24.2 v 44 l 80.3 46.8 l 38.4 -22.2 l 39.4 22.8 l 41.9 -24.2 v -44 l -41.9 -24.3 Z m -0.2 45.1 l -32.9 -19.1 l 33.2 -19.4 l 32.9 19.3 l -33.2 19.2 Z m -77.9 -38.8 l 33.2 19.2 l -32.8 19.1 l -33.1 -19.3 l 32.7 -19 Z m 72.2 -3 l -32.5 18.9 l -33.1 -19.2 l 32.6 -19 l 33 19.3 Z m -77.5 -0.6 l -6.7 3.9 l -27.1 15.3 l -32.3 -19.2 l 33.1 -19.2 l 33 19.2 Z m -68.9 4.8 l 32.5 19.6 v 34.6 l -32.5 -19.8 v -34.4 Z m 39 23 l 32.5 19.3 v 34.5 l -32.5 -19.3 v -34.5 Z m 77.3 0.4 l 33.1 19.5 v 34.2 l -33.1 -19.7 v -34 Z" />
+    <g opacity="0.5">
+      <polygon points="44.8,88.2 77.3,107.3 77.3,72.9 44.8,53.6" />
+      <polygon points="5.8,64.9 38.3,84.7 38.3,50.2 5.8,30.6" />
+      <polygon points="122.1,88.1 155.2,107.8 155.2,73.5 122.1,54" />
+    </g>
+  </symbol>
 
+  <symbol id="search-icon" fill="currentColor" viewBox="0 0 38 38">
+    <path d="M 26.7 25.1 l -3.7 -3.8 c 0.7 -1.1 1.2 -2.4 1.2 -3.8 c -0.1 -3.6 -3 -6.5 -6.7 -6.5 c -3.6 0 -6.6 2.9 -6.6 6.6 s 3 6.6 6.6 6.6 c 1.4 0 2.7 -0.5 3.8 -1.2 l 3.7 3.7 c 0.2 0.2 0.5 0.3 0.9 0.3 c 0.3 0 0.6 -0.1 0.9 -0.3 c 0.3 -0.4 0.3 -1.2 -0.1 -1.6 m -9.1 -2.6 c -2.7 0 -4.9 -2.2 -4.9 -4.9 s 2.2 -4.9 4.9 -4.9 s 4.9 2.2 4.9 4.9 s -2.2 4.9 -4.9 4.9" />
+  </symbol>
 
+  <symbol id="twitter" fill="currentColor" viewBox="0 0 38 38">
+    <path d="M 27 12.4 c -0.7 0.4 -1.4 0.6 -2.2 0.8 c -0.6 -0.7 -1.5 -1.1 -2.5 -1.1 c -2.3 0 -3.9 2.1 -3.4 4.3 c -2.9 -0.1 -5.5 -1.5 -7.2 -3.6 c -0.9 1.5 -0.4 3.6 1.1 4.6 c -0.6 0 -1.1 -0.1 -1.6 -0.4 c 0 1.7 1.1 3.2 2.8 3.5 c -0.5 0.2 -1.1 0.2 -1.6 0.1 c 0.4 1.4 1.7 2.4 3.2 2.4 c -1.5 1.1 -3.4 1.6 -5.2 1.4 c 1.5 1 3.3 1.6 5.3 1.6 c 6.5 0 10.1 -5.4 9.9 -10.3 c 0.7 -0.5 1.3 -1.1 1.9 -1.9 c -0.6 0.2 -1.3 0.4 -2 0.5 c 0.7 -0.4 1.3 -1.2 1.5 -1.9 Z" />
+  </symbol>
+
+  <symbol id="facebook" fill="currentColor" viewBox="0 0 38 38">
+    <path d="M 21.4 12.8 h 2.1 v -3.4 h -2.7 c -2.9 0 -4.2 1.3 -4.2 3.7 v 2.6 h -2 v 3.3 h 2 v 9.6 h 3.9 v -9.7 h 2.7 l 0.3 -3.2 h -3 v -1.8 c 0 -0.8 0.2 -1.1 0.9 -1.1 Z" />
+  </symbol>
+
+  <symbol id="google-plus" fill="currentColor" viewBox="0 0 38 38">
+    <path d="M 10.6 24 c 0 2 2.3 3.2 5.1 3.2 c 3.9 0 5.4 -2.1 5.4 -3.7 c 0 -1.4 -0.5 -2.3 -2 -3.4 c -1.6 -1.1 -1.9 -1.8 -0.5 -2.9 c 0.8 -0.6 1.4 -1.5 1.4 -2.6 c 0 -1.2 -0.5 -2.2 -1.4 -2.7 h 1.3 l 1.1 -1.1 h -4.8 c -3 0 -4.5 1.8 -4.5 3.8 s 1.4 3.6 4.1 3.6 c -0.4 0.9 -0.3 1.6 0.4 2.2 c -4.6 0 -5.6 2 -5.6 3.6 Z m 3 -9.5 c -0.3 -1.7 0.6 -3 1.9 -3 s 2.4 1.4 2.6 3.1 c 0.2 1.7 -0.5 2.8 -1.7 2.8 c -1.3 0 -2.6 -1.2 -2.8 -2.9 Z m 2.4 6.3 c 2.2 0.1 3.4 1.4 3.4 2.8 c 0 1.5 -1.2 2.6 -3.7 2.6 c -1.9 0 -3.3 -1.2 -3.3 -2.7 c 0 -1.4 1.6 -2.7 3.6 -2.7 Z" /><polygon points="25.2,10.9 24.1,10.9 24.1,13.1 21.9,13.1 21.9,14.2 24.1,14.2 24.1,16.4 25.2,16.4 25.2,14.2 27.4,14.2 27.4,13.1 25.2,13.1" />
+  </symbol>
+
+  <symbol id="y-combinator" fill="currentColor" viewBox="0 0 38 38">
+    <path d="M 22.4 10.9 h 3.8 l -5.3 10 v 6 h -3.3 v -6 l -5.5 -10 h 3.9 l 3.3 7 l 3.1 -7 Z" />
+  </symbol>
+
+  <symbol id="linkedin" fill="currentColor" viewBox="0 0 38 38">
+    <rect x="11.6" y="15.5" width="3.4" height="10.8" />
+    <ellipse cx="13.3" cy="12.1" rx="2" ry="2" />
+    <path d="M 27.5 26.4 v -6.9 c 0 -2.9 -1.6 -4.3 -3.9 -4.3 s -3.3 1.8 -3.3 1.8 v -1.5 h -3.2 v 10.8 h 3.2 v -5.7 c 0 -1.5 0.7 -2.4 2 -2.4 c 1.2 0 1.8 0.9 1.8 2.4 v 5.7 h 3.4 Z" />
+  </symbol>
+
+  <symbol id="github" fill="currentColor" viewBox="0 0 38 38">
+    <path d="M 23 35.9 v -4.5 c 0 -1.6 -0.5 -2.5 -1.1 -3 c 3.6 -0.4 7.5 -1.8 7.5 -8.1 c 0 -1.8 -0.6 -3.3 -1.7 -4.4 c 0.2 -0.4 0.7 -2.1 -0.2 -4.3 c 0 0 -1.4 -0.4 -4.5 1.6 c -1.3 -0.3 -2.7 -0.5 -4.2 -0.5 c -1.4 0 -2.8 0.2 -4.2 0.5 c -3.1 -2.1 -4.5 -1.6 -4.5 -1.6 c -0.9 2.3 -0.3 3.9 -0.2 4.3 c -1 1.1 -1.7 2.6 -1.7 4.4 c 0 6.3 3.8 7.7 7.4 8.1 c -0.4 0.4 -0.9 1.1 -1 2.2 c -1 0.4 -3.3 1.1 -4.8 -1.4 c 0 0 -0.9 -1.6 -2.5 -1.7 c 0 0 -1.6 0 -0.1 1 c 0 0 1 0.5 1.8 2.4 c 0 0 1 2.9 5.5 1.9 v 3 c 0 0.4 -0.3 1 -1 0.8 c 1.6 0.5 3.4 0.9 5.2 0.9 c 1.8 0 3.5 -0.3 5.2 -0.9 c -0.6 0.3 -0.9 -0.2 -0.9 -0.7 Z" />
+  </symbol>
+
+  <symbol id="subscribe" fill="currentColor" viewBox="0 0 38 38">
+    <path d="M 21.6 26.9 c 0 -5.8 -4.7 -10.5 -10.5 -10.5 v 3.2 c 4 0 7.3 3.3 7.3 7.3 h 3.2 Z m -6.2 -2.2 c 0 -1.2 -1 -2.2 -2.2 -2.2 c -1.2 0 -2.2 1 -2.2 2.2 s 1 2.2 2.2 2.2 c 1.2 0 2.2 -0.9 2.2 -2.2 Z m 11.6 2.3 c 0 -8.8 -7.1 -16 -15.9 -16 v 3.2 c 3.4 0 6.6 1.3 9 3.7 s 3.7 5.6 3.7 9 l 3.2 0.1 Z" />
+  </symbol>
+
+</svg>
+
+  <header class="branding" role="banner">
+
+  <a class="logo" href="/">
+    <span class="hidden">Compose</span>
+    <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo" /></svg>
+  </a>
+
+  <a class="menu-btn" href="#?">Menu</a>
+
+  <nav class="main-nav" role="navigation" data-yield="primary_nav">
+    <dl class="drop-down">
+      <dt>Databases</dt>
+      <dd>
         <ul>
-          <li><a href="https://github.com/gaessaki/RedSnap/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/gaessaki/RedSnap/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/gaessaki/RedSnap">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+          <li><a href="/mongodb/">MongoDB</a></li>
+          <li><a href="/elasticsearch/">Elasticsearch</a></li>
+          <li><a href="/rethinkdb/">RethinkDB</a></li>
+          <li><a href="/redis/">Redis</a></li>
+          <li><a href="/postgresql/">PostgreSQL</a></li>
+          <li><a href="/etcd/">etcd</a></li>
+          <li><a href="/rabbitmq/">RabbitMQ</a></li>
+     </ul>
+      </dd>
+    </dl>
+    <a class="articles" href="/articles/">Articles</a>
+    <a href="https://app.compose.io">Sign in</a>
+    <a class="register-btn" href="https://www.compose.io/signup/svelte/?trial_days=30">Free 30-Day Trial</a>
+  </nav>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
+</header>
+  <main class="content container" role="main">
 
-<h3>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We’ve crafted some handsome templates for you to use. Go ahead and click 'Continue to layouts' to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved.</p>
-
-<h3>
-<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating pages manually</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/#mentioning-users-and-teams" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/gaessaki">gaessaki</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
     
-  </body>
+
+
+<article class="post tag-compose-2 tag-mongodb tag-oplog tag-meteor container">
+
+  <header class="hero cover" style="background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(https://res.cloudinary.com/dyyck73ly/image/upload/v1455539141/fgutisd94agnhpqpnads.jpg) 49.9% 49.9% / cover;">
+
+  <h1 class="post-title">Connecting to the Oplog on the new MongoDB</h1>
+
+  <nav class="post-share">
+
+    <a class="twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" href="https://twitter.com/share?text=Connecting%20to%20the%20Oplog%20on%20the%20new%20MongoDB&amp;url=https://www.compose.io/articles/connecting-to-the-oplog-on-the-new-mongodb/&amp;via=composeio">
+      <span class="hidden">Share on Twitter</span>
+      <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#twitter" /></svg>
+    </a>
+
+    <a onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" href="https://www.facebook.com/sharer/sharer.php?u=https://www.compose.io/articles/connecting-to-the-oplog-on-the-new-mongodb/">
+      <span class="hidden">Share on Facebook</span>
+      <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#facebook" /></svg>
+    </a>
+
+    <a onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" href="https://plus.google.com/share?url=https://www.compose.io/articles/connecting-to-the-oplog-on-the-new-mongodb/">
+      <span class="hidden">Share on Google+</span>
+      <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#google-plus" /></svg>
+    </a>
+
+    <a onclick="window.open(this.href, 'hacker-news-share','width=580,height=296');return false;" href="http://news.ycombinator.com/submitlink?u=https://www.compose.io/articles/connecting-to-the-oplog-on-the-new-mongodb/&amp;t=Connecting to the Oplog on the new MongoDB">
+      <span class="hidden">Vote on Hacker News</span>
+      <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#y-combinator" /></svg>
+    </a>
+  </nav>
+
+  <span class="post-date">Published <time datetime="2016-02-16">Feb 16, 2016</time></span>
+
+</header>
+  <p><em>In our <a href="https://compose.io/articles/connecting-to-the-new-mongodb-at-compose/">previous article</a> on the new MongoDB at Compose, we looked at connecting to the new MongoDB deployments and picked out what has changed compared to the previous MongoDB Classic. If you are considering using the new MongoDB with Meteor, please read this.</em></p>
+
+<p>In the previous article, we talked about the admin database, where we keep the credentials of cross-database power users. The reason we've talked about the admin database is because there's one other account that can live in there, the oplog user account. MongoDB Classic users should pay close attention here as this is where one of the biggest changes with new MongoDB is. </p>
+
+<p>The way the new MongoDB works means that normal logins through the Mongos/haproxy routers can't get direct access to the oplog. There's a whole configuration and routing system and shard management between them and the replica set inside the shard where the oplog is. The Compose MongoDB deployments have a way around this limitation, but before we discuss that, we want you to consider a question:</p>
+
+<h2 id="whyoplog">Why Oplog?</h2>
+
+<p>You will need to ask yourself at this point is "Do I need the oplog?". As you know, the oplog is a continuously updated capped collection of all the changes being made to all the databases in the deployment. It's what powers the replication in a replica set. </p>
+
+<p>Access to the Oplog is useful in two particular scenarios. One is when you are copying data from MongoDB and want to reflect all the changes in another system - we use it to power the "tail" mode in the open source Transporter. </p>
+
+<p>The other is to keep Meteor application servers synchronised so that users will see sub-ten second updates for information on multiple screens. If you only have one Meteor application server then you don't need to worry about using the oplog. Change notification to clients originates in the Meteor server and checks on collections for changes that weren't made by the server are made in ten seconds or so.</p>
+
+<p>It's when you move up to having multiple Meteor servers that the oplog may come in useful. Meteor's MongoDB driver uses it to get a continuous feed of changes from the database so that when Server 1 makes a change, Servers 2, 3 and so on are immediately aware of it. It can be really very impressive to demonstrate. But as <a href="http://adammonsen.com/post/1314">some developers have found</a> it also comes at a cost. </p>
+
+<p>Consider a scenario where a Meteor application has many servers and many users, each user working on a mostly isolated task from other users. With oplogs enabled, every user is generating activity in the oplog, but little of it is of any immediate use or needs to be immediately visible on every Meteor server and client. But every server is processing the change feed and that has a cost in CPU activity. Take out the oplog from the equation and servers poll for updates on a regular basis, unaffected by traffic bursts from other servers, for changes relevant to them, apply the changes and notify the clients that may be affected. </p>
+
+<p>To suggest there's a general rule for when you should use the oplog with Meteor would be folly, but we do recommend that you always consider testing your application without the oplog enabled before pursuing that path. Oplogs are cool but can come with a hidden cost and with that in mind, we can move on.</p>
+
+<h2 id="ameteoroplogissue">A Meteor Oplog Issue</h2>
+
+<p>There is a, hopefully transitory, thing that you will have to bear in mind with Meteor and our new MongoDB; currently MongoDB 3.2 is not supported by Meteor. The upcoming Meteor 1.3, currently in beta, is in need of updated MongoDB drivers and both Meteor 1.2 and beta 1.3 exhibit similar problems talking to our oplog implementation. This includes a long startup time of a minute or more and disconnections from the oplog between 40 minutes and 3 hours after starting. </p>
+
+<p>The issue is specific to Meteor; we've tested our oplog access with Node applications and with our Transporter. We'll keep testing as Meteor 1.3 continues through beta but for now our advice is: </p>
+
+<p><strong>If you want to run Meteor with an Oplog enabled MongoDB driver, use a MongoDB Classic deployment</strong>. </p>
+
+<p>If you are prepared to run without an Oplog enabled MongoDB driver, then you should be able to use Meteor with the new MongoDB but be aware that, in this scenario, although Meteor works, it isn't officially supported. </p>
+
+<h2 id="activatingoplogs">Activating Oplogs</h2>
+
+<p>At Compose, we created the Oplog Addon which gives access to the replica set. You'll find it in the Addons area, accessed from the <em>Addons</em> button in the main menu. When you get there you'll find this:</p>
+
+<p><img alt="" src="https://res.cloudinary.com/dyyck73ly/image/upload/v1455032493/dzzyjotiya7fhuilroo1.png"></p>
+
+<p>Oplog access is an addon service and we charge $4.50 a month to run the Oplog Access portal. This is because it requires its own configuration and capsule to support its operation. It does come with SSL which we recommend you turn on before enabling the oplog so that you ensure your data is encrypted.</p>
+
+<p>In the previous article on connections to new MongoDB, we mentioned that users don't get to be configured with oplog access any more. With architecting the deployment so you have access to the admin database, we've simplified the process of creating an oplog user by generating it and its credentials for you. Once enabled, the Oplog Access portal will display some of those credentials like so:</p>
+
+<p><img alt="" src="https://res.cloudinary.com/dyyck73ly/image/upload/v1455197505/mbdlmhr7nkzijrgm4yt4.png"></p>
+
+<p>Some of this will look familiar as it echoes the main connection string panel on the Compose Console's overview. As you can see, the username for oplog access is "oploguser" and the password is hidden away. You'll need your Compose account password to reveal it when you click on <em>Show</em> but when you do that you'll also find the <em>Connection String</em> and <em>Command Line</em> are updated with the same credentials.</p>
+
+<p>Of those two, the <em>Connection String</em> is likely the one that will be of most interest as it's more likely an application will need access. Let's look at an oplog URI:</p>
+
+<div class="pre-wrapper"><pre><code>mongodb://oploguser:password@haproxy768.aws-us-east-1-portal.7.dblayer.com:10768/local?authSource=admin&amp;ssl=true  
+</code></pre></div>
+
+<p>The start of the URL has much in common with other MongoDB URI's. It starts with the schema (<code>mongodb://</code>), followed by the user name and password (<code>oploguser</code> and the preset password), then an @ and the address and port of the server (<code>haproxy768.aws-us-east-1-portal.7.dblayer.com:10768</code>).</p>
+
+<p>What comes next is the important part. The next component is the name of the database you want to access and in this case, and for every case involving the oplog, it is <code>local</code>. This is the database that contains the oplog. You may wonder why it isn't the particular database you want to track. The reason is simple; the oplog is global to the entire deployment so has its own database, <code>local</code>.</p>
+
+<p>But the <code>local</code> database has no users associated with it. That's why we create the <code>oploguser</code> which not only has access to the oplog but also read-only access to all the databases on the deployment. Because of its global access read-only access, that's why we create the <code>oploguser</code> as a user in the <code>admin</code> database. And that in turn explains the next bit of the URI – <code>?authSource=admin</code>. That snippet tells MongoDB to look for authentication credentials in the <code>admin</code> database, rather than the specified database. You'll want to use this technique for any admin users you create too. </p>
+
+<p>The final part of the URI, <code>?ssl=true</code> just turns the SSL capabilities on in the driver. Be aware, if you haven't turned SSL on, your entire session will take place in plaintext across the internet. </p>
+
+<h2 id="wheretousetheoploguri">Where to use the Oplog URI</h2>
+
+<h3 id="transporter">Transporter</h3>
+
+<p>When you are defining a MongoDB source in <code>config.yaml</code> for the Transporter which has tail set to true. Set the <code>uri</code> property to the oplog URI. This will use the oplog to tail the database and keep another database continuously up to date. All the copying of existing data will go through the oplog portal.</p>
+
+<p>If you only want to copy data and do not need the continuous update, we recommend that you use a normal database user and its URI (as per <a href="https://compose.io/articles/connecting-to-the-new-mongodb-at-compose/">our previous article</a>) to connect and don't activate the Oplog access portal.</p>
+
+<h3 id="meteor">Meteor</h3>
+
+<p>If you are configuring Meteor, then use the URI for the MONGO<em>OPLOG</em>URL environment variable. Remember that for the MONGO_URL environment variable, you'll want to use a single host referencing URI as we <a href="https://compose.io/articles/connecting-to-the-new-mongodb-at-compose/">previously covered</a>.</p>
+
+<h3 id="otheroplogconsumers">Other Oplog consumers</h3>
+
+<p>It will of course vary by application, but generally most oplog capable applications should be able to use the generated oplog URI for the portal. </p>
+
+<h2 id="wrappingup">Wrapping up</h2>
+
+<p>The oplog is a powerful way of tapping into MongoDB's replication system. That said, it's also not a formally supported route and that means that some applications or drivers can break when faced with variations. We've made the Oplog Access portal available on our new MongoDB and tested it with known drivers and we'll happily work with any developers who want to test their work with our implementation.</p>
+
+  <footer class="post-footer">
+
+  <nav class="post-share">
+
+    <a class="twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" href="https://twitter.com/share?text=Connecting%20to%20the%20Oplog%20on%20the%20new%20MongoDB&amp;url=https://www.compose.io/articles/connecting-to-the-oplog-on-the-new-mongodb/&amp;via=composeio">
+      <span class="hidden">Share on Twitter</span>
+      <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#twitter" /></svg>
+    </a>
+
+    <a onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" href="https://www.facebook.com/sharer/sharer.php?u=https://www.compose.io/articles/connecting-to-the-oplog-on-the-new-mongodb/">
+      <span class="hidden">Share on Facebook</span>
+      <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#facebook" /></svg>
+    </a>
+
+    <a onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" href="https://plus.google.com/share?url=https://www.compose.io/articles/connecting-to-the-oplog-on-the-new-mongodb/">
+      <span class="hidden">Share on Google+</span>
+      <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#google-plus" /></svg>
+    </a>
+
+    <a onclick="window.open(this.href, 'hacker-news-share','width=580,height=296');return false;" href="http://news.ycombinator.com/submitlink?u=https://www.compose.io/articles/connecting-to-the-oplog-on-the-new-mongodb/&amp;t=Connecting to the Oplog on the new MongoDB">
+      <span class="hidden">Vote on Hacker News</span>
+      <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#y-combinator" /></svg>
+    </a>
+
+    <a class="subscribe-btn" href="https://www.compose.io/articles/rss/">
+      <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#subscribe" /></svg> Subscribe
+    </a>
+  </nav>
+
+
+      <figure class="author-bio">
+
+        <img class="avatar" alt="Dj Walker-Morgan" src="//www.gravatar.com/avatar/3c427b45eb4d51770a5ec7f9e4d62c9f?s=250&amp;d=mm&amp;r=x">
+
+        <figcaption>
+          <strong>Dj Walker-Morgan</strong> is Compose's resident Content Curator, and has been both a developer and writer since Apples came in II flavors and Commodores had Pets. Love this article? Head over to <a href="/articles/author/dj/">Dj Walker-Morgan’s author page</a> and keep reading.
+        </figcaption>
+
+      </figure>
+
+
+</footer>
+
+</article>
+
+
+
+  </main>
+
+  <footer class="colophon" role="contentinfo">
+  <nav class="footer-nav">
+    <dl>
+      <dt>Company</dt>
+      <dd>
+        <a href="/about-us/">About Us</a>
+        <a href="/jobs/">We’re Hiring</a>
+        <a href="/articles/">Articles</a>
+        <a href="/write-stuff/">Write Stuff</a>
+        <a href="/pricing/">Plans <span class="amp">&amp;</span> Pricing</a>
+        <a href="/database-as-a-service/">Database as a Service</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt>Support</dt>
+      <dd>
+        <a href="https://status.compose.io/">System Status</a>
+        <a href="https://help.compose.io/docs/compose-email-support">Support</a>
+        <a href="https://help.compose.io">Docs</a>
+        <a href="/security/">Security</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt>Databases</dt>
+      <dd>
+        <a href="/mongodb/">MongoDB</a>
+        <a href="/elasticsearch/">Elasticsearch</a>
+        <a href="/rethinkdb/">RethinkDB</a>
+        <a href="/redis/">Redis</a>
+        <a href="/postgresql/">PostgreSQL</a>
+        <a href="/enhanced/">Enhanced</a>
+        <a href="/etcd/">etcd</a>
+        <a href="/RabbitMQ/">RabbitMQ</a>
+    </dd>
+    </dl>
+    <dl>
+      <dt>Deployments</dt>
+      <dd>
+        <a href="/aws/">AWS</a>
+        <a href="/digitalocean/">DigitalOcean</a>
+        <a href="/softlayer/">SoftLayer</a>
+
+        <nav class="social-nav">
+          <a href="https://twitter.com/composeio/">
+            <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#twitter" /></svg>
+          </a>
+          <a href="https://www.facebook.com/composeio/">
+            <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#facebook" /></svg>
+          </a>
+          <a href="https://plus.google.com/+ComposeIo/">
+            <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#google-plus" /></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/compose-io/">
+            <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#linkedin" /></svg>
+          </a>
+        </nav></dd>
+      </dl></nav>
+    
+  
+  <p>© 2016</p>
+</footer>
+
+  
+
+
+    <script src="/javascripts/site.js"></script>
+
+
+
+
+</body>
 </html>
