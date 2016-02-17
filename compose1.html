@@ -710,82 +710,7 @@ ul li {
   <span class="post-date">Published <time datetime="2016-02-16">Feb 16, 2016</time></span>
 
 </header>
-  <p><em>In our <a href="https://compose.io/articles/connecting-to-the-new-mongodb-at-compose/">previous article</a> on the new MongoDB at Compose, we looked at connecting to the new MongoDB deployments and picked out what has changed compared to the previous MongoDB Classic. If you are considering using the new MongoDB with Meteor, please read this.</em></p>
 
-<p>In the previous article, we talked about the admin database, where we keep the credentials of cross-database power users. The reason we've talked about the admin database is because there's one other account that can live in there, the oplog user account. MongoDB Classic users should pay close attention here as this is where one of the biggest changes with new MongoDB is. </p>
-
-<p>The way the new MongoDB works means that normal logins through the Mongos/haproxy routers can't get direct access to the oplog. There's a whole configuration and routing system and shard management between them and the replica set inside the shard where the oplog is. The Compose MongoDB deployments have a way around this limitation, but before we discuss that, we want you to consider a question:</p>
-
-<h2 id="whyoplog">Why Oplog?</h2>
-
-<p>You will need to ask yourself at this point is "Do I need the oplog?". As you know, the oplog is a continuously updated capped collection of all the changes being made to all the databases in the deployment. It's what powers the replication in a replica set. </p>
-
-<p>Access to the Oplog is useful in two particular scenarios. One is when you are copying data from MongoDB and want to reflect all the changes in another system - we use it to power the "tail" mode in the open source Transporter. </p>
-
-<p>The other is to keep Meteor application servers synchronised so that users will see sub-ten second updates for information on multiple screens. If you only have one Meteor application server then you don't need to worry about using the oplog. Change notification to clients originates in the Meteor server and checks on collections for changes that weren't made by the server are made in ten seconds or so.</p>
-
-<p>It's when you move up to having multiple Meteor servers that the oplog may come in useful. Meteor's MongoDB driver uses it to get a continuous feed of changes from the database so that when Server 1 makes a change, Servers 2, 3 and so on are immediately aware of it. It can be really very impressive to demonstrate. But as <a href="http://adammonsen.com/post/1314">some developers have found</a> it also comes at a cost. </p>
-
-<p>Consider a scenario where a Meteor application has many servers and many users, each user working on a mostly isolated task from other users. With oplogs enabled, every user is generating activity in the oplog, but little of it is of any immediate use or needs to be immediately visible on every Meteor server and client. But every server is processing the change feed and that has a cost in CPU activity. Take out the oplog from the equation and servers poll for updates on a regular basis, unaffected by traffic bursts from other servers, for changes relevant to them, apply the changes and notify the clients that may be affected. </p>
-
-<p>To suggest there's a general rule for when you should use the oplog with Meteor would be folly, but we do recommend that you always consider testing your application without the oplog enabled before pursuing that path. Oplogs are cool but can come with a hidden cost and with that in mind, we can move on.</p>
-
-<h2 id="ameteoroplogissue">A Meteor Oplog Issue</h2>
-
-<p>There is a, hopefully transitory, thing that you will have to bear in mind with Meteor and our new MongoDB; currently MongoDB 3.2 is not supported by Meteor. The upcoming Meteor 1.3, currently in beta, is in need of updated MongoDB drivers and both Meteor 1.2 and beta 1.3 exhibit similar problems talking to our oplog implementation. This includes a long startup time of a minute or more and disconnections from the oplog between 40 minutes and 3 hours after starting. </p>
-
-<p>The issue is specific to Meteor; we've tested our oplog access with Node applications and with our Transporter. We'll keep testing as Meteor 1.3 continues through beta but for now our advice is: </p>
-
-<p><strong>If you want to run Meteor with an Oplog enabled MongoDB driver, use a MongoDB Classic deployment</strong>. </p>
-
-<p>If you are prepared to run without an Oplog enabled MongoDB driver, then you should be able to use Meteor with the new MongoDB but be aware that, in this scenario, although Meteor works, it isn't officially supported. </p>
-
-<h2 id="activatingoplogs">Activating Oplogs</h2>
-
-<p>At Compose, we created the Oplog Addon which gives access to the replica set. You'll find it in the Addons area, accessed from the <em>Addons</em> button in the main menu. When you get there you'll find this:</p>
-
-<p><img alt="" src="https://res.cloudinary.com/dyyck73ly/image/upload/v1455032493/dzzyjotiya7fhuilroo1.png"></p>
-
-<p>Oplog access is an addon service and we charge $4.50 a month to run the Oplog Access portal. This is because it requires its own configuration and capsule to support its operation. It does come with SSL which we recommend you turn on before enabling the oplog so that you ensure your data is encrypted.</p>
-
-<p>In the previous article on connections to new MongoDB, we mentioned that users don't get to be configured with oplog access any more. With architecting the deployment so you have access to the admin database, we've simplified the process of creating an oplog user by generating it and its credentials for you. Once enabled, the Oplog Access portal will display some of those credentials like so:</p>
-
-<p><img alt="" src="https://res.cloudinary.com/dyyck73ly/image/upload/v1455197505/mbdlmhr7nkzijrgm4yt4.png"></p>
-
-<p>Some of this will look familiar as it echoes the main connection string panel on the Compose Console's overview. As you can see, the username for oplog access is "oploguser" and the password is hidden away. You'll need your Compose account password to reveal it when you click on <em>Show</em> but when you do that you'll also find the <em>Connection String</em> and <em>Command Line</em> are updated with the same credentials.</p>
-
-<p>Of those two, the <em>Connection String</em> is likely the one that will be of most interest as it's more likely an application will need access. Let's look at an oplog URI:</p>
-
-<div class="pre-wrapper"><pre><code>mongodb://oploguser:password@haproxy768.aws-us-east-1-portal.7.dblayer.com:10768/local?authSource=admin&amp;ssl=true  
-</code></pre></div>
-
-<p>The start of the URL has much in common with other MongoDB URI's. It starts with the schema (<code>mongodb://</code>), followed by the user name and password (<code>oploguser</code> and the preset password), then an @ and the address and port of the server (<code>haproxy768.aws-us-east-1-portal.7.dblayer.com:10768</code>).</p>
-
-<p>What comes next is the important part. The next component is the name of the database you want to access and in this case, and for every case involving the oplog, it is <code>local</code>. This is the database that contains the oplog. You may wonder why it isn't the particular database you want to track. The reason is simple; the oplog is global to the entire deployment so has its own database, <code>local</code>.</p>
-
-<p>But the <code>local</code> database has no users associated with it. That's why we create the <code>oploguser</code> which not only has access to the oplog but also read-only access to all the databases on the deployment. Because of its global access read-only access, that's why we create the <code>oploguser</code> as a user in the <code>admin</code> database. And that in turn explains the next bit of the URI – <code>?authSource=admin</code>. That snippet tells MongoDB to look for authentication credentials in the <code>admin</code> database, rather than the specified database. You'll want to use this technique for any admin users you create too. </p>
-
-<p>The final part of the URI, <code>?ssl=true</code> just turns the SSL capabilities on in the driver. Be aware, if you haven't turned SSL on, your entire session will take place in plaintext across the internet. </p>
-
-<h2 id="wheretousetheoploguri">Where to use the Oplog URI</h2>
-
-<h3 id="transporter">Transporter</h3>
-
-<p>When you are defining a MongoDB source in <code>config.yaml</code> for the Transporter which has tail set to true. Set the <code>uri</code> property to the oplog URI. This will use the oplog to tail the database and keep another database continuously up to date. All the copying of existing data will go through the oplog portal.</p>
-
-<p>If you only want to copy data and do not need the continuous update, we recommend that you use a normal database user and its URI (as per <a href="https://compose.io/articles/connecting-to-the-new-mongodb-at-compose/">our previous article</a>) to connect and don't activate the Oplog access portal.</p>
-
-<h3 id="meteor">Meteor</h3>
-
-<p>If you are configuring Meteor, then use the URI for the MONGO<em>OPLOG</em>URL environment variable. Remember that for the MONGO_URL environment variable, you'll want to use a single host referencing URI as we <a href="https://compose.io/articles/connecting-to-the-new-mongodb-at-compose/">previously covered</a>.</p>
-
-<h3 id="otheroplogconsumers">Other Oplog consumers</h3>
-
-<p>It will of course vary by application, but generally most oplog capable applications should be able to use the generated oplog URI for the portal. </p>
-
-<h2 id="wrappingup">Wrapping up</h2>
-
-<p>The oplog is a powerful way of tapping into MongoDB's replication system. That said, it's also not a formally supported route and that means that some applications or drivers can break when faced with variations. We've made the Oplog Access portal available on our new MongoDB and tested it with known drivers and we'll happily work with any developers who want to test their work with our implementation.</p>
 
   <footer class="post-footer">
 
@@ -819,10 +744,10 @@ ul li {
 
       <figure class="author-bio">
 
-        <img class="avatar" alt="Dj Walker-Morgan" src="//www.gravatar.com/avatar/3c427b45eb4d51770a5ec7f9e4d62c9f?s=250&amp;d=mm&amp;r=x">
+        <img class="avatar" alt="Dj Walker-Morgan" src="">
 
         <figcaption>
-          <strong>Dj Walker-Morgan</strong> is Compose's resident Content Curator, and has been both a developer and writer since Apples came in II flavors and Commodores had Pets. Love this article? Head over to <a href="/articles/author/dj/">Dj Walker-Morgan’s author page</a> and keep reading.
+          <strong>Author ????????</strong>
         </figcaption>
 
       </figure>
