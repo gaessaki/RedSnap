@@ -727,9 +727,9 @@ var mongoose = require('mongoose')
 var config = require(./config);
 	
 	mongoose.connect(config.mongoURL, config.mongoOptions, function (err, res) {
-    if (err) console.log("error connecting to db " + err)
+    if (err) console.log(err)
     else console.log('Connection to MongoDB instance established')
-});</code></pre></div><p>If you haven’t already, you should run your app with <em>npm start</em> in the terminal to see if your connection works fine. If they do, we can start structuring our user data on MongoDB.</p><h2>Modeling data in MongoDB with Mongoose</h2><p>Everything in the concoction of Mongoose and MongoDB builds off of the concept of a Schema. A schema as you’d imagine, defines a data structure for our documents. Each Schema corresponds to a collection. In our case, our ‘UserSchema’ will map to our User collection in MongoDB.</p><p>We start off by creating a <a href="https://github.com/gaessaki/RedSnap/blob/master/RedSnap/RedSnap/models/User.js">User.js</a> file in the <a href="https://github.com/gaessaki/RedSnap/tree/master/RedSnap/RedSnap/models">models</a> folder of our app. We require mongoose and create a new schema using its Schema constructor.</p><div class="pre-wrapper"><pre><code>var mongoose = require('mongoose');
+});</code></pre></div><p>If you haven’t already, you should run your app with <em>npm start</em> in the terminal to see if your connection works fine. If they do, we can start structuring our user data on MongoDB.</p><h2>Modeling data in MongoDB with Mongoose</h2><p>Everything in the concoction of Mongoose and MongoDB builds off of the concept of a <em>Schema</em>. A schema as you’d imagine, defines a data structure for our documents. Each Schema corresponds to a collection. In our case, our ‘UserSchema’ will map to our User collection in MongoDB.</p><p>We start off by creating a <a href="https://github.com/gaessaki/RedSnap/blob/master/RedSnap/RedSnap/models/User.js">User.js</a> file in the <a href="https://github.com/gaessaki/RedSnap/tree/master/RedSnap/RedSnap/models">models</a> folder of our app. We require mongoose and create a new schema using its Schema constructor.</p><div class="pre-wrapper"><pre><code>var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 ...
 
