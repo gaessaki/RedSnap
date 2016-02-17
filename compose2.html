@@ -680,7 +680,7 @@ ul li {
 
 <article class="post tag-compose-2 tag-mongodb tag-oplog tag-meteor container">
 
-  <header class="hero cover" style="linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(https://res.cloudinary.com/dyyck73ly/image/upload/v1451927961/csz4pi82az7lzzhxiwts.jpg) 49.9% 49.9% / cover">
+  <header class="hero cover" style="background:linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(https://res.cloudinary.com/dyyck73ly/image/upload/v1451927961/csz4pi82az7lzzhxiwts.jpg) 49.9% 49.9% / cover">
 
   <h1 class="post-title">Composing a Snapchat clone with MongoDB, Redis and Node.js (Part 2)</h1>
 
@@ -712,10 +712,10 @@ ul li {
 </header>
 
 <p>*Mhmmm*, do you smell that? It’s the smell of freshly baked code. Let us not dawdle and head straight for the goods. Our first order of business is generating some scaffold code to work with. If you’re not familiar with node.js and its express.js web framework, I suggest you take a brief respite and quickly familiarize yourself with node.js through a fun interactive console tutorial, <a href="https://github.com/workshopper/learnyounode">learnyounode</a>, and then <a href="http://expressjs.com/en/starter/generator.html">auto-generate</a> (scaffold) a basic express.js app.</p><p>Once that’s done, we can install the two important MongoDB 
-libraries for node.js, <a href="https://www.npmjs.com/package/mongodb"><em>mongodb</em></a>, MongoDB’s node.js driver and <a href="https://www.npmjs.com/package/mongoose"><em>mongoose</em></a>, an Object Document Mapper (ODM) that will drastically facilitate our interactions with MongoDB. Throughout this tutorial, we’ll communicate with MongoDB entirely with mongoose to avoid having to write MongoDB boilerplate.</p><p>In <a href="https://github.com/gaessaki/RedSnap/blob/master/RedSnap/RedSnap/package.json">package.json</a> we list <em>mongoose</em> as a dependency and then we run <em>npm install</em> in the same folder to have node.js download and install the libraries. Mongoose should automatically download MongoDB's drivers as dependencies.</p><code><pre>"dependencies": {
+libraries for node.js, <a href="https://www.npmjs.com/package/mongodb"><em>mongodb</em></a>, MongoDB’s node.js driver and <a href="https://www.npmjs.com/package/mongoose"><em>mongoose</em></a>, an Object Document Mapper (ODM) that will drastically facilitate our interactions with MongoDB. Throughout this tutorial, we’ll communicate with MongoDB entirely with mongoose to avoid having to write MongoDB boilerplate.</p><p>In <a href="https://github.com/gaessaki/RedSnap/blob/master/RedSnap/RedSnap/package.json">package.json</a> we list <em>mongoose</em> as a dependency and then we run <em>npm install</em> in the same folder to have node.js download and install the libraries. Mongoose should automatically download MongoDB's drivers as dependencies.</p><div class="pre-wrapper"><pre><code>"dependencies": {
 "mongoose": "^4.4.3"
 ...
-}</pre></code><p>Next we’ll connect to MongoDB. The first code that typically runs in a node.js+express.js web application is that of the app.js file (sometimes titled server.js). We bootstrap mongodb in the first few lines by requiring the necessary node.js module. In our case, mongoose will call mongodb for us, so we only have to reference mongoose.</p>
+}</code></pre></div><p>Next we’ll connect to MongoDB. The first code that typically runs in a node.js+express.js web application is that of the app.js file (sometimes titled server.js). We bootstrap mongodb in the first few lines by requiring the necessary node.js module. In our case, mongoose will call mongodb for us, so we only have to reference mongoose.</p>
 
   <footer class="post-footer">
 
