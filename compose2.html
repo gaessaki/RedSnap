@@ -715,7 +715,15 @@ ul li {
 libraries for node.js, <a href="https://www.npmjs.com/package/mongodb"><em>mongodb</em></a>, MongoDB’s node.js driver and <a href="https://www.npmjs.com/package/mongoose"><em>mongoose</em></a>, an Object Document Mapper (ODM) that will drastically facilitate our interactions with MongoDB. Throughout this tutorial, we’ll communicate with MongoDB entirely with mongoose to avoid having to write MongoDB boilerplate.</p><p>In <a href="https://github.com/gaessaki/RedSnap/blob/master/RedSnap/RedSnap/package.json">package.json</a> we list <em>mongoose</em> as a dependency and then we run <em>npm install</em> in the same folder to have node.js download and install the libraries. Mongoose should automatically download MongoDB's drivers as dependencies.</p><div class="pre-wrapper"><pre><code>"dependencies": {
 "mongoose": "^4.4.3"
 ...
-}</code></pre></div><p>Next we’ll connect to MongoDB. The first code that typically runs in a node.js+express.js web application is that of the app.js file (sometimes titled server.js). We bootstrap mongodb in the first few lines by requiring the necessary node.js module. In our case, mongoose will call mongodb for us, so we only have to reference mongoose.</p>
+}</code></pre></div><p>Next we’ll connect to MongoDB. The first code that typically runs in a node.js+express.js web application is that of the <a href="https://github.com/gaessaki/RedSnap/blob/master/RedSnap/RedSnap/app.js">app.js</a> file (sometimes titled server.js). We bootstrap mongodb in the first few lines by requiring the necessary node.js module. In our case, mongoose will call mongodb for us, so we only have to reference mongoose.</p><div class="pre-wrapper"><pre><code>...
+var mongoose = require('mongoose')
+...</code></pre></div><p>Connecting with mongoose is a trivial matter, we simply insert the connection strings and options and receive an error callback. We’ll define these in a config.js file outside of app.js to avoid publishing our deployment credentials in a git commit. We’ll require the config file just as we required mongoose and invoke the URI and options properties as the inputs for mongoose connect method.</p><p>We can specify several different options as properties of our options object, but for simplicity’s sake, we’ll only list ‘user’ and ‘pass’ (not ‘password’ however, MongoDB won’t recognize that). If you’re using MongoDB with Compose, check out this <a href="https://compose.io/articles/connecting-to-the-new-mongodb-at-compose/">tutorial</a> on how you can get your MongoDB URI and database user info, (in addition to learning about how you can connect to MongoDB using SSL).</p><h5><em>config.js</em></h5><div class="pre-wrapper"><pre><code>module.exports = {
+    mongoURL : 'mongodb://[host]:[port]/[dbname]',
+    mongoOptions : {
+        user : [username],
+        pass : [password]
+    }
+}</code></pre></div><p>If you haven’t already, you should run your app with npm start in the terminal to see if your connection works fine. If they do, we can start structuring our user data on MongoDB.</p><h2>Modeling data in MongoDB with Mongoose</h2>
 
   <footer class="post-footer">
 
