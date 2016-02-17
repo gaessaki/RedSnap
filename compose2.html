@@ -748,7 +748,34 @@ var UserSchema = new Schema({
     hashedPassword: String,
     salt: String
 
-});</code></pre></div><p>As you can see, we include all the user fields that we listed in the previous <a href="http://gaessaki.github.io/RedSnap/compose1">post</a>. We get to set options for each property such as <em>required</em>, to oblige the document to have a value for the field before creating a document, or <em>unique</em>, to make sure that no user has the same username as another.</p><p>In addition to Strings and Numbers, we can also have arrays of objects as we do with <strong>requested</strong> and <strong>current friends</strong> or Dates as we do with <strong>date_joined.</strong> Finally, it should be noted that there is a hidden property that we haven’t explicitly defined in our schema. MongoDB will automatically generate an <strong>_id</strong> value for each document. Though each user has a unique username, it will be convenient for us to refer to user documents through ids.</p><p>Although we’ve structured our document with sub-documents, it could be useful to define some overarching organization of our schema for convenience’s sake. In particular, it would be useful to have a <strong>user_info</strong> field separate from password data so that when a controller tries to deliver all the user info to a user without sending the password hash, we don’t have to manually query and list each property of the user, but we can just return a user_info object.</p><p>While we could just define all our non-password user data as part of a <strong>user_info</strong> object in the schema, we can avoid growing our data tree and overhead through the definition of a user_info virtual. Think in the case of user info; listing all user info under a <strong>user_info</strong> property wouldn’t actually provide us with any more data than we would normally obtain by leaving it as is.  A mongoose virtual is a document property we can access without actually persisting in our document, perfect for our use case.</p>
+});</code></pre></div><p>As you can see, we include all the user fields that we listed in the previous <a href="http://gaessaki.github.io/RedSnap/compose1">post</a>. We get to set options for each property such as <em>required</em>, to oblige the document to have a value for the field before creating a document, or <em>unique</em>, to make sure that no user has the same username as another.</p><p>In addition to Strings and Numbers, we can also have arrays of objects as we do with <strong>requested</strong> and <strong>current friends</strong> or Dates as we do with <strong>date_joined.</strong> Finally, it should be noted that there is a hidden property that we haven’t explicitly defined in our schema. MongoDB will automatically generate an <strong>_id</strong> value for each document. Though each user has a unique username, it will be convenient for us to refer to user documents through ids.</p><p>Although we’ve structured our document with sub-documents, it could be useful to define some overarching organization of our schema for convenience’s sake. In particular, it would be useful to have a <strong>user_info</strong> field separate from password data so that when a controller tries to deliver all the user info to a user without sending the password hash, we don’t have to manually query and list each property of the user, but we can just return a <strong>user_info</strong> object.</p><p>While we could just define all our non-password user data as part of a <strong>user_info</strong> object in the schema, we can avoid growing our data tree and overhead through the definition of a <strong>user_info</strong> virtual. Think in the case of user info; listing all user info under a <strong>user_info</strong> property wouldn’t actually provide us with any more data than we would normally obtain by leaving it as is. A mongoose virtual is a document property we can access without actually persisting in our document, perfect for our use case.</p>div class="pre-wrapper"><pre><code>UserSchema
+  .virtual('user_info') //name virtual
+  .get(function () { //attach getter method to virtual
+    return { '_id': this._id, 'username': this.username, 'email': this.email, 'snap_count': this.snap_count, 'friends': this.friends };
+});</code></pre></div><p>We can also create setters for our virtuals. This is helpful when we want to input a value into the database and want to do some processing with it or manipulate multiple values at once. We could use this functionality in our case to encrypt any plaintext passwords before they ever hit the database. Let’s define a mongoose virtual that sets a user’s hashed password when a plaintext password is inputted from our controller.</p> <div class="pre-wrapper"><pre><code>UserSchema.virtual('password')
+.set(function (password) {
+    this._password = password;
+    this.salt = this.makeSalt(); //create a salt and set it as a user property
+    this.hashedPassword = this.encryptPassword(password); //generated a hashed password and set it as a property of our user
+})
+.get(function () {
+    return this._password;
+});</code></pre></div><p>We might need to create salts or encrypt passwords on occasions other than when we set a user's password. To facilitate this, we can define some custom methods for our user schema. We’ll require the node.js encryption module crypto (don’t forget to list it in package.json and npm install). Using crypto, we’ll generate a salt which we’ll set as our user’s salt and set the hashed password as a function of our salt and plain text encrypted through <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKFD2.</a></p><div class="pre-wrapper"><pre><code>UserSchema.methods = {
+  authenticate: function (plainText) {
+        return this.encryptPassword(plainText) === this.hashedPassword; //if the user's inputted password on login is the same hashed 
+		//as our stored hashedPassword, then authenticate
+    },
+  makeSalt: function () {
+        return crypto.randomBytes(16).toString('base64'); //Generate random 64bit string as salt
+    },
+  encryptPassword: function (password) {
+        if (!password || !this.salt) return ''; 
+        var salt = new Buffer(this.salt, 'base64'); 
+        return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64'); //apply algorithm on our password with 10k iterations 
+		//and resulting base64 string can be stored as or compared to hashedPassword
+    }
+};
+</code></pre></div>
   <footer class="post-footer">
 
   <nav class="post-share">
