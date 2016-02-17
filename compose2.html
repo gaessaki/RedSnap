@@ -717,14 +717,38 @@ libraries for node.js, <a href="https://www.npmjs.com/package/mongodb"><em>mongo
 ...
 }</code></pre></div><p>Next we’ll connect to MongoDB. The first code that typically runs in a node.js+express.js web application is that of the <a href="https://github.com/gaessaki/RedSnap/blob/master/RedSnap/RedSnap/app.js">app.js</a> file (sometimes titled server.js). We bootstrap mongodb in the first few lines by requiring the necessary node.js module. In our case, mongoose will call mongodb for us, so we only have to reference mongoose.</p><div class="pre-wrapper"><pre><code>...
 var mongoose = require('mongoose')
-...</code></pre></div><p>Connecting with mongoose is a trivial matter, we simply insert the connection strings and options and receive an error callback. We’ll define these in a config.js file outside of app.js to avoid publishing our deployment credentials in a git commit. We’ll require the config file just as we required mongoose and invoke the URI and options properties as the inputs for mongoose connect method.</p><p>We can specify several different options as properties of our options object, but for simplicity’s sake, we’ll only list ‘user’ and ‘pass’ (not ‘password’ however, MongoDB won’t recognize that). If you’re using MongoDB with Compose, check out this <a href="https://compose.io/articles/connecting-to-the-new-mongodb-at-compose/">tutorial</a> on how you can get your MongoDB URI and database user info, (in addition to learning about how you can connect to MongoDB using SSL).</p><h5><em>config.js</em></h5><div class="pre-wrapper"><pre><code>module.exports = {
+...</code></pre></div><p>Connecting with mongoose is a trivial matter, we simply insert the connection strings and options and receive an error callback. We’ll define these in a config.js file outside of app.js to avoid publishing our deployment credentials in a git commit. We’ll require the config file just as we required mongoose and invoke the URI and options properties as the inputs for mongoose connect method.</p><p>We can specify several different options as properties of our options object, but for simplicity’s sake, we’ll only list ‘user’ and ‘pass’ (not ‘password’ however, MongoDB won’t recognize that). If you’re using MongoDB with Compose, check out this <a href="https://compose.io/articles/connecting-to-the-new-mongodb-at-compose/">tutorial</a> on how you can get your MongoDB URI and database user info, (in addition to learning about how you can connect to MongoDB using SSL).</p><h4><em>config.js</em></h4><div class="pre-wrapper"><pre><code>module.exports = {
     mongoURL : 'mongodb://[host]:[port]/[dbname]',
     mongoOptions : {
         user : [username],
         pass : [password]
     }
-}</code></pre></div><p>If you haven’t already, you should run your app with npm start in the terminal to see if your connection works fine. If they do, we can start structuring our user data on MongoDB.</p><h2>Modeling data in MongoDB with Mongoose</h2>
+}</code></pre></div><p>If you haven’t already, you should run your app with npm start in the terminal to see if your connection works fine. If they do, we can start structuring our user data on MongoDB.</p><h2>Modeling data in MongoDB with Mongoose</h2><p>Everything in the concoction of Mongoose and MongoDB builds off of the concept of a Schema. A schema as you’d imagine, defines a data structure for our documents. Each Schema corresponds to a collection. In our case, our ‘UserSchema’ will map to our User collection in MongoDB.</p><p>We start off by creating a <a href="https://github.com/gaessaki/RedSnap/blob/master/RedSnap/RedSnap/models/User.js">User.js</a> file in the <a href="https://github.com/gaessaki/RedSnap/tree/master/RedSnap/RedSnap/models">models</a> folder of our app. We require mongoose and create a new schema using its Schema constructor.</p><div class="pre-wrapper"><pre><code>var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+...
 
+var UserSchema = new Schema({
+    username: {
+        type: String, required: true, unique: true
+    },   
+    email: {
+        type: String, required: true, unique: true
+    },
+    date_joined: {
+        type: Date, required: true, default: Date
+    },
+    snap_count: {
+        sent: { type: Number, default: 0 },
+        received: { type: Number, default: 0 }
+    },
+    friends: {
+        requested: [{username: String}],
+        current: [{username: String}]
+    },
+    hashedPassword: String,
+    salt: String
+
+});</code></pre></div><p>As you can see, we include all the user fields that we listed in the previous <a href="http://gaessaki.github.io/RedSnap/compose1">post</a>. We get to set options for each property such as <em>required</em>, to oblige the document to have a value for the field before creating a document, or <em>unique</em>, to make sure that no user has the same username as another.</p><p>In addition to Strings and Numbers, we can also have arrays of objects as we do with <strong>requested</strong> and <strong>current friends</strong> or Dates as we do with <strong>date_joined.</strong> Finally, it should be noted that there is a hidden property that we haven’t explicitly defined in our schema. MongoDB will automatically generate an <strong>_id</strong> value for each document. Though each user has a unique username, it will be convenient for us to refer to user documents through ids.</p><p>Although we’ve structured our document with sub-documents, it could be useful to define some overarching organization of our schema for convenience’s sake. In particular, it would be useful to have a <strong>user_info</strong> field separate from password data so that when a controller tries to deliver all the user info to a user without sending the password hash, we don’t have to manually query and list each property of the user, but we can just return a user_info object.</p><p>While we could just define all our non-password user data as part of a <strong>user_info</strong> object in the schema, we can avoid growing our data tree and overhead through the definition of a user_info virtual. Think in the case of user info; listing all user info under a <strong>user_info</strong> property wouldn’t actually provide us with any more data than we would normally obtain by leaving it as is.  A mongoose virtual is a document property we can access without actually persisting in our document, perfect for our use case.</p>
   <footer class="post-footer">
 
   <nav class="post-share">
