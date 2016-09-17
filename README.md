@@ -20,11 +20,11 @@ The node.js app can expose its API and thus iOS, Android, Windows Phone, Raspber
 
 ##Notice
 
-As it stands, RedSnap is WIP and thus I can make no guarantee of security, privacy or functionality. Restrain from submitting personally indentifiable information or any data that you would not like compromised (i.e. personal photos) into the system. **Use at your own risk.**
+As it stands, RedSnap is WIP and thus I can make no guarantee of security, privacy or functionality. Refrain from submitting personally indentifiable information or any data that you would not like compromised (i.e. personal photos) into the system. **Use at your own risk.**
 
 ##Installation
 
-Requires MongoDB and Redis instances (check out https://compose.io to quickly spin some up). To install, clone the repo and then create a config.js file in the root folder of the application (the one with app.js). Then include the following in the file:
+Requires MongoDB and Redis instances. To install, clone the repo and then create a config.js file in the root folder of the application (the one with app.js). Then include the following in the file:
 
 ```
 module.exports = {
