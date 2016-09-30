@@ -13,6 +13,8 @@ module.exports = new CronJob('00 00 4 * * 0-6', function () {
             //delete from filesystem
             //delete snap data from redis
             //call cronjob from app.js
+            
+            //Weird, I'm pretty sure I implemented this, but for some reason it's not on Github. Will have to check where the code went
         
         }, function (err) { 
         
