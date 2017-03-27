@@ -1,11 +1,11 @@
-# RedSnap
+### RedSnap
 An open-source web-based Snapchat clone. Built with node.js, express.js, angular, mongodb and redis.
 
 *Historically, privacy was almost implicit, because it was hard to find and gather information. But in the digital world, whether it’s digital cameras or satellites or just what you click on, we need to have more explicit rules—not just for governments but for private companies. —Bill Gates*
 
 Works in the latest versions of Edge, Firefox and Chrome (use https to enable webcam). Works to some degree on Android Chrome. Please read the [notice] (https://github.com/gaessaki/RedSnap/blob/master/README.md#notice) before trying the site out. As the app was built as an MVP over the weekend, the code is by no means an indicator of best practices. There are many vulnerabilities that I am aware of in the code and I am sure you will find more (Please contribute fixes if you can). DEMO: https://myhack.ca.
 
-####Why did I build this?
+####Why did I build this?####
 
 My primary intention was to practice my web development skills as I come from a .NET and Android background. The more I got into it however, the more I saw the importance and the need of an open-source alternative to Snapchat. By no means am I anti-Snapchat (I'll still probably use it every day for the time being), but the incentives are evident:
 
